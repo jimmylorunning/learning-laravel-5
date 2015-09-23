@@ -12,7 +12,7 @@ class ArticlesController extends Controller
 {
   public function index() 
   {
-    $articles = Article::latest()->get();
+    $articles = Article::latest('published_at')->published()->get();
     return view('articles.index', compact('articles'));
   }
 
@@ -22,6 +22,7 @@ class ArticlesController extends Controller
 /*  // use this if using just find() instead of findOrFail()  
     if (!$article)
       abort(404); */
+//    dd($article->published_at);
     return view('articles.show', compact('article'));
   }
 
@@ -33,10 +34,7 @@ class ArticlesController extends Controller
   public function store()
   {
     // note: change the use line up above to use Request; instead of the default use Illuminate\Http\Request;
-    $input = Request::all();
-    $input['published_at'] = Carbon::now();
-//    return $input;
-    Article::create($input);
+    Article::create(Request::all());
     return redirect('articles');
   }
 }
