@@ -1,4 +1,3 @@
-    {!! Form::hidden('user_id', 1) !!}
     {!! Form::label('title', 'Title:') !!}
     {!! Form::text('title', null, ['class' => 'form-control', 'foo' => 'bar']) !!}
     <div class="form-group">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -67,7 +68,8 @@ class ArticlesController extends Controller
   public function store(Requests\ArticleRequest $request)
   {
     // note: change the use line up above to use Request; instead of the default use Illuminate\Http\Request;
-    Article::create($request->all());
+    $article = new Article($request->all());
+    Auth::user()->articles()->save($article);
     return redirect('articles');
   }
 }
