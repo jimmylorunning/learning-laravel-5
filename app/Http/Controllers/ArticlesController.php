@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
@@ -31,10 +30,16 @@ class ArticlesController extends Controller
     return view('articles.create');
   }
 
-  public function store()
+  /**
+   * Save a new article.
+   * 
+   * @param CreateArticleRequest $request
+   * @return Response
+   */
+  public function store(Requests\CreateArticleRequest $request)
   {
     // note: change the use line up above to use Request; instead of the default use Illuminate\Http\Request;
-    Article::create(Request::all());
+    Article::create($request->all());
     return redirect('articles');
   }
 }
