@@ -11,7 +11,8 @@ class Article extends Model
   protected $fillable = [
     'title',
     'body',
-    'published_at'  
+    'published_at',
+    'user_id' // temporary!
   ];
 
   // this lets us use the Carbon instance instead of the timestamp
@@ -31,6 +32,11 @@ class Article extends Model
   public function setPublishedAtAttribute($date)
   {
     $this->attributes['published_at'] = Carbon::parse($date);
+  }
+
+  public function user()
+  {
+    return $this->belongsTo('App\User');
   }
 
 }
