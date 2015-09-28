@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/home.scss"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,kBAAkB,EAFb","file":"app.css","sourceRoot":"/source/","sourcesContent":[".home {\n  color: red;\n  padding-top: 20px;\n}"]}
