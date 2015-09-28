@@ -27,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot($router);
+
+        $router->model('articles', 'App\Article'); // binds it to the articles model
+        // or Route::model->model(...)
+        // is a facade  - pointers to a registered underlying class
     }
 
     /**

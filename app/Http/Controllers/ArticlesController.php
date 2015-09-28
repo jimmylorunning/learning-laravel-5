@@ -22,9 +22,12 @@ class ArticlesController extends Controller
     return view('articles.index', compact('articles'));
   }
 
-  public function show($id)
+  public function show(Article $article)
   {
-    $article = Article::findOrFail($id);
+// route model binding means we'll get the article directly instead of an id
+// see RouteServiceProvider.php
+//    $article = Article::findOrFail($id);
+
 /*  // use this if using just find() instead of findOrFail()  
     if (!$article)
       abort(404); */
@@ -43,9 +46,9 @@ class ArticlesController extends Controller
    * 
    * @return Response
    */
-  public function edit($id)
+  public function edit(Article $article)
   {
-    $article = Article::findOrFail($id);
+//    $article = Article::findOrFail($id);
 
     return view('articles.edit', compact('article'));
   }
@@ -56,9 +59,9 @@ class ArticlesController extends Controller
    * 
    * @return Response
    */
-  public function update($id, Requests\ArticleRequest $request)
+  public function update(Article $article, Requests\ArticleRequest $request)
   {
-    $article = Article::findOrFail($id);
+ //   $article = Article::findOrFail($id);
     $article->update($request->all());
 
     return redirect('articles');
