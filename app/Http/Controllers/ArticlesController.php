@@ -76,8 +76,15 @@ class ArticlesController extends Controller
   public function store(Requests\ArticleRequest $request)
   {
     // note: change the use line up above to use Request; instead of the default use Illuminate\Http\Request;
+/*
     $article = new Article($request->all());
     Auth::user()->articles()->save($article);
-    return redirect('articles');
+*/
+    Auth::user()->articles()->create($request->all());
+//    session()->flash('flash_message', 'Your article has been created!');
+    return redirect('articles')->with([
+      'flash_message' => 'Your article has been created',
+      'flash_message_important' => true
+    ]);
   }
 }
