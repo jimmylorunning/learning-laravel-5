@@ -41,6 +41,11 @@ class User extends Model implements AuthenticatableContract,
     {
       return $this->hasMany('App\Article'); 
     }
+
+    public function tags()
+    {
+      return $this->belongsToMany('App\Tag');
+    }
     
     public function isATeamManager() 
     {
