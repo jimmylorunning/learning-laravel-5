@@ -37,9 +37,9 @@ class ArticlesController extends Controller
 
   public function create()
   {
-    return view('articles.create');
+    $tags = \App\Tag::lists('name', 'id');
+    return view('articles.create', compact('tags'));
   }
-
 
   /**
    * Edit an existing article.
@@ -49,10 +49,9 @@ class ArticlesController extends Controller
   public function edit(Article $article)
   {
 //    $article = Article::findOrFail($id);
-
-    return view('articles.edit', compact('article'));
+    $tags = \App\Tag::lists('name', 'id');
+    return view('articles.edit', compact('article', 'tags'));
   }
-
 
   /**
    * Update an existing article.
@@ -80,7 +79,8 @@ class ArticlesController extends Controller
     $article = new Article($request->all());
     Auth::user()->articles()->save($article);
 */
-    Auth::user()->articles()->create($request->all());
+    $article = Auth::user()->articles()->create($request->all());
+    $article->tags()->attach($request->input('tag_list'));
 //    session()->flash('flash_message', 'Your article has been created!');
     return redirect('articles')->with([
       'flash_message' => 'Your article has been created',

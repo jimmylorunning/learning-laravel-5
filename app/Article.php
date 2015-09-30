@@ -44,4 +44,9 @@ class Article extends Model
     return $this->belongsTo('App\User');
   }
 
+  public function getTagListAttribute()
+  {
+    return $this->tags->lists('id')->all();
+  }
+
 }
