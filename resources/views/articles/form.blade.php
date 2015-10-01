@@ -14,10 +14,6 @@
       {!! Form::submit($submitButtonText, ['class' => 'btn form-control']) !!}
     </div> 
 
-@section('head')
-  @include('partials.select2head')
-@stop
-
 @section('scripts')
   @include('partials.select2footer', ['multiSelectClass' => $multiSelectClass])
 @stop

@@ -13,17 +13,25 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
-    mix.phpUnit();
+//    mix.phpUnit();
 
-    mix.sass('app.scss');
+    mix.sass('app.scss', 'resources/css');
 
     mix.styles([
-      'vendor/normalize.css',
-      'app.css'
-    ], null, 'public/css');
+      'libs/bootstrap.min.css',
+      'app.css',
+      'libs/select2.min.css'
+    ], null, 'resources/css');
+
+    mix.scripts([
+      'libs/jquery.js',
+      'libs/select2.min.js',
+      'libs/bootstrap.min.js'
+    ], null, 'resources/js');
+
 
 // second argument (null) means output will be all.css, but you can also specify something like final/output.css
-    mix.version('public/css/all.css');
+//    mix.version('public/css/all.css');
 
 /*
   mix.coffee("*", "public/css", {
