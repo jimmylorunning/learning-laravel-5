@@ -9,7 +9,15 @@
     </div>
     <div class="form-group">
       {!! Form::label('tag_list', 'Tags:') !!}
-      {!! Form::select('tag_list[]', $tags, null, ['class' => 'form-control', 'multiple']) !!}
+      {!! Form::select('tag_list[]', $tags, null, ['class' => "form-control $multiSelectClass", 'multiple']) !!}
     <div class="form-group">
       {!! Form::submit($submitButtonText, ['class' => 'btn form-control']) !!}
     </div> 
+
+@section('head')
+  @include('partials.select2head')
+@stop
+
+@section('scripts')
+  @include('partials.select2footer', ['multiSelectClass' => $multiSelectClass])
+@stop
