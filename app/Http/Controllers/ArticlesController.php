@@ -62,7 +62,7 @@ class ArticlesController extends Controller
   {
  //   $article = Article::findOrFail($id);
     $article->update($request->all());
-
+    $this->syncTags($article, $request->input('tag_list'));
     return redirect('articles');
   }
 
@@ -79,12 +79,22 @@ class ArticlesController extends Controller
     $article = new Article($request->all());
     Auth::user()->articles()->save($article);
 */
-    $article = Auth::user()->articles()->create($request->all());
-    $article->tags()->attach($request->input('tag_list'));
+    $this->createArticle($request);
 //    session()->flash('flash_message', 'Your article has been created!');
     return redirect('articles')->with([
       'flash_message' => 'Your article has been created',
       'flash_message_important' => true
     ]);
   }
+
+  private function syncTags(Article $article, array $tags)
+  {
+    $article->tags()->sync($tags);
+  }
+
+  private function createArticle(Requests\ArticleRequest $request)
+  {
+    $article = Auth::user()->articles()->create($request->all());
+    $this->syncTags($article, $request->input('tag_list'));
+  } 
 }
